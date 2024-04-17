@@ -27,11 +27,12 @@ function App() {
     setCards(shuffled_Cards)
     setTurns(0)
   }
-  
+
   // handle a choice
   const handleChoice = (card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
   }
+
 
   //compare 2 selected cards:
   useEffect(() => {
@@ -45,11 +46,10 @@ function App() {
             else { return card }
           })
         })
-
-
         resetTurn()
+
       } else {
-        setTimeout(() => resetTurn() , 1300)
+        setTimeout(() => resetTurn(), 1000)
       }
     }
   }, [choiceOne, choiceTwo])
