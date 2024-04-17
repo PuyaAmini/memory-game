@@ -27,6 +27,7 @@ function App() {
     setCards(shuffled_Cards)
     setTurns(0)
   }
+  
   // handle a choice
   const handleChoice = (card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
@@ -41,19 +42,17 @@ function App() {
             if (card.src === choiceOne.src) {
               return { ...card, matched: true }
             }
-            else{ return card}
+            else { return card }
           })
         })
 
 
         resetTurn()
       } else {
-        console.log('nop')
-        resetTurn()
+        setTimeout(() => resetTurn() , 1300)
       }
     }
   }, [choiceOne, choiceTwo])
-  console.log(cards)
 
   const resetTurn = () => {
     setChoiceOne(null)
@@ -72,7 +71,11 @@ function App() {
 
       <div className='card-grid'>
         {cards.map(card => (
-          <SingleCard key={card.id} card={card} handleChoice={handleChoice} />
+          <SingleCard key={card.id}
+            card={card}
+            handleChoice={handleChoice}
+            flipped={card === choiceOne || card === choiceTwo || card.matched}
+          />
         ))}
       </div>
     </div>
