@@ -16,6 +16,7 @@ function App() {
 
   const [cards, setCards] = useState([])
   const [turns, setTurns] = useState(0)
+  const [disabled , setDisabled] = useState(false)
 
   const [choiceOne, setChoiceOne] = useState(null)
   const [choiceTwo, setChoiceTwo] = useState(null)
@@ -24,6 +25,7 @@ function App() {
     setChoiceOne(null)
     setChoiceTwo(null)
     setTurns(prevTurns => prevTurns++)
+    setDisabled(false)
   }
 
   const handleChoice = (card) => {
@@ -33,6 +35,7 @@ function App() {
 
     if (choiceOne && choiceTwo) {
 
+      setDisabled(true)
 
       if (choiceOne.src === choiceTwo.src) {
         setCards(prevCards => {
@@ -71,6 +74,7 @@ function App() {
       <div className='card-grid'>{cards.map(card => (
         <SingleCard key={card.id} card={card}
         handleChoice={handleChoice}
+        disabled = {disabled}
         flipped={card === choiceOne || card === choiceTwo || card.matched}
       />
       ))}</div>
