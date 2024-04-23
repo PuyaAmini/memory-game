@@ -1,11 +1,20 @@
 import './singleCard.css'
 
-export default function singleCard({card}) {
+export default function singleCard({card, handleChoice}) {
+
+const handleClick = ()=>{
+  handleChoice(card)
+}
   return (
     <div className='card'>
       <div>
-        <img className='front' src={card.src} alt='card front' />
-        <img className='back' src='/img/cover.png' alt='card back' />
+
+        <img className='front' src={card.src} 
+        alt='card front' />
+
+        <img className='back' onClick={handleClick}
+        src='/img/cover.png' alt='cover' />
+
       </div>
     </div>
   )

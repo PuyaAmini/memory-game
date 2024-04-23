@@ -17,6 +17,32 @@ function App() {
   const [cards, setCards] = useState([])
   const [turns, setTurns] = useState(0)
 
+  const [choiceOne, setChoiceOne] = useState(null)
+  const [choiceTwo, setChoiceTwo] = useState(null)
+
+  const resetTurn = () => {
+    setChoiceOne(null)
+    setChoiceTwo(null)
+    setTurns(prevTurns => prevTurns++)
+  }
+
+  const handleChoice = (card) => {
+    choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
+  }
+  useEffect(() => {
+
+    if (choiceOne && choiceTwo) {
+      if (choiceOne.src === choiceTwo.src) {
+        console.log('yep')
+        resetTurn()
+      } else {
+        console.log('nop')
+        resetTurn()
+      }
+    }
+
+  }, [choiceOne, choiceTwo])
+
   const shuffleCards = () => {
 
     const shuffled_Cards = [...cardImages, ...cardImages]
@@ -37,7 +63,7 @@ function App() {
       <h1>Magic Mind</h1>
       <button onClick={shuffleCards}>New Game</button>
       <div className='card-grid'>{cards.map(card => (
-        <SingleCard key={card.id} card={card} />
+        <SingleCard key={card.id} card={card} handleChoice={handleChoice} />
       ))}</div>
     </div>
   );
